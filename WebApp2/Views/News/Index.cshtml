@@ -1,0 +1,36 @@
+﻿@model List<News>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h1>Xeberler</h1>
+        <a asp-action="create" class="btn btn-success"><i class="fas fa-plus-circle"></i></a>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Metinin bashligi</th>
+                    <th>Metnin texti</th>
+                    <th>Yaranma tarixi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var news in Model)
+                {
+                <tr>
+                    <td>@news.Title</td>
+                    <td>@news.Body</td>
+                    <td>@news.datetime.ToString("HH:mm dd.MM.yyyy")</td>
+                    <td>
+                        <a asp-action="edit" asp-route-id="@news.Id"><i class="fas fa-edit"></i></a>
+                        <a asp-action="delete" asp-route-id="@news.Id" onclick="return confirm('Are you sure?')" class="text-danger"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
